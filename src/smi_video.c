@@ -41,7 +41,7 @@ Author of changes: Corvin Zahn <zahn@zac.de>
 Date:   2.11.2001
 */
 
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/drivers/siliconmotion/smi_video.c,v 1.14 2003/12/08 16:03:58 alanh Exp $ */
+/* $XdotOrg: xc/programs/Xserver/hw/xfree86/drivers/siliconmotion/smi_video.c,v 1.2 2004/04/23 19:45:06 eich Exp $ */
 /* $XFree86: xc/programs/Xserver/hw/xfree86/drivers/siliconmotion/smi_video.c,v 1.13 2003/11/10 18:22:26 tsi Exp $ */
 
 #include "smi.h"
@@ -179,7 +179,7 @@ static Atom xvInterlaced;
 #define N_SVIDEO_CHANNELS 2
 
 #define N_VIDEO_INPUTS 2
-typedef enum _VideoInput { COMPOSITE, SVIDEO } VideoInput;
+typedef enum _VideoInput { VID_COMPOSITE, VID_SVIDEO } VideoInput;
 
 
 /**************************************************************************/
@@ -580,18 +580,18 @@ SMI_BuildEncodings(SMI_PortPtr p)
     p->nenc = 0;
     for (ch = 0; ch < N_COMPOSITE_CHANNELS; ch++) {
 	for (n = 0; n < N_VIDEO_NORMS; n++) {
-	    SMI_AddEncoding(p->enc, p->nenc, n, COMPOSITE, ch);
+	    SMI_AddEncoding(p->enc, p->nenc, n, VID_COMPOSITE, ch);
 	    p->norm[p->nenc]  = n;
-	    p->input[p->nenc] = COMPOSITE;
+	    p->input[p->nenc] = VID_COMPOSITE;
 	    p->channel[p->nenc] = ch;
 	    p->nenc++;
 	}
     }
     for (ch = 0; ch < N_SVIDEO_CHANNELS; ch++) {
 	for (n = 0; n < N_VIDEO_NORMS; n++) {
-	    SMI_AddEncoding(p->enc, p->nenc, n, SVIDEO, ch);
+	    SMI_AddEncoding(p->enc, p->nenc, n, VID_SVIDEO, ch);
 	    p->norm[p->nenc]  = n;
-	    p->input[p->nenc] = SVIDEO;
+	    p->input[p->nenc] = VID_SVIDEO;
 	    p->channel[p->nenc] = ch;
 	    p->nenc++;
 	}
@@ -767,7 +767,7 @@ SetAttrSAA7111(ScrnInfoPtr pScrn, int i, int value)
 	    return XvBadAlloc;
 	}
 	/* set video input format and channel */
-	if (input == COMPOSITE) {
+	if (input == VID_COMPOSITE) {
 	    if (!xf86I2CWriteVec(&(pPort->I2CDev),
 				 SAA7111CompositeChannelSelect[channel],
 				 ENTRIES(SAA7111CompositeChannelSelect[channel]) / 2)) {
