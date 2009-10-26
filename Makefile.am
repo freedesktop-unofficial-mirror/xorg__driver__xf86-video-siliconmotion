@@ -21,9 +21,7 @@
 AUTOMAKE_OPTIONS = foreign
 SUBDIRS = src man
 
-EXTRA_DIST = ChangeLog CALLMAP Release.txt
-
-MAINTAINERCLEANFILES=ChangeLog
+EXTRA_DIST = CALLMAP Release.txt
 
 .PHONY: ChangeLog
 
