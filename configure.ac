@@ -81,7 +81,6 @@ AC_HEADER_STDC
 
 if test "x$XSERVER_LIBPCIACCESS" = xyes; then
     PKG_CHECK_MODULES([PCIACCESS], [pciaccess >= 0.8.0])
-    XORG_CFLAGS="$XORG_CFLAGS $PCIACCESS_CFLAGS"
 fi
 AM_CONDITIONAL(XSERVER_LIBPCIACCESS, test "x$XSERVER_LIBPCIACCESS" = xyes)
 AM_CONDITIONAL(XMODES, test "x$XMODES" = xyes)
@@ -90,8 +89,6 @@ if test "x$XMODES" = xyes; then
     AC_DEFINE(HAVE_XMODES, 1, [X server has new mode code])
 fi
 
-XORG_CFLAGS="$CWARNFLAGS $XORG_CFLAGS"
-AC_SUBST([XORG_CFLAGS])
 AC_SUBST([moduledir])
 
 DRIVER_NAME=siliconmotion
