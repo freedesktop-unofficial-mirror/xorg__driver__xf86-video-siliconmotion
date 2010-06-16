@@ -1060,7 +1060,7 @@ SMI_PutVideo(
     if(!xf86_crtc_clip_video_helper(pScrn, &crtc, crtcConf->crtc[0], &dstBox, &x1, &x2, &y1, &y2, clipBoxes, width, height))
 	LEAVE(Success);
 
-    if(pSmi->Dualhead && crtc == crtcConf->crtc[1])
+    if (crtc != crtcConf->crtc[0])
 	LEAVE(Success);
 
     /* Transform dstBox to the CRTC coordinates */
@@ -1519,6 +1519,9 @@ SMI_PutImage(
 	if (!xf86_crtc_clip_video_helper(pScrn, &crtc, crtcConf->crtc[0], &dstBox,
 					 &x1, &x2, &y1, &y2, clipBoxes,
 					 width, height))
+	    LEAVE(Success);
+
+	if (!crtc)
 	    LEAVE(Success);
 
 	/* Transform dstBox to the CRTC coordinates */
@@ -2466,6 +2469,9 @@ SMI_DisplaySurface(
 
     if(!xf86_crtc_clip_video_helper(surface->pScrn, &crtc, crtcConf->crtc[0], &dstBox,
 				    &x1, &x2, &y1, &y2, clipBoxes, surface->width, surface->height))
+	LEAVE(Success);
+
+    if (!crtc)
 	LEAVE(Success);
 
     /* Transform dstBox to the CRTC coordinates */
