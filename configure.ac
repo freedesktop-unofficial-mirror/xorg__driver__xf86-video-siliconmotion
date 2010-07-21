@@ -22,9 +22,9 @@
 
 AC_PREREQ([2.60])
 AC_INIT([xf86-video-siliconmotion],
-        1.7.4,
+        [1.7.4],
         [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],
-        xf86-video-siliconmotion)
+        [xf86-video-siliconmotion])
 
 # Require X.Org macros 1.8 or later for MAN_SUBSTS set by XORG_MANPAGE_SECTIONS
 m4_ifndef([XORG_MACROS_VERSION],
