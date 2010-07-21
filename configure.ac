@@ -75,8 +75,6 @@ AC_CHECK_HEADER(xf86Modes.h,
 		[XMODES=yes], [XMODES=no], [#include "xorg-server.h"])
 CPPFLAGS="$SAVE_CPPFLAGS"
 
-# Checks for header files.
-AC_HEADER_STDC
 
 if test "x$XSERVER_LIBPCIACCESS" = xyes; then
     PKG_CHECK_MODULES([PCIACCESS], [pciaccess >= 0.8.0])
