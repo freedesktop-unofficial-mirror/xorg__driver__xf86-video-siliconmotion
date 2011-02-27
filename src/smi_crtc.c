@@ -170,8 +170,8 @@ SMI_CrtcDestroy (xf86CrtcPtr	crtc)
 {
     ENTER();
 
-    xfree(SMICRTC(crtc));
-    xfree(crtc->funcs);
+    free(SMICRTC(crtc));
+    free((xf86CrtcFuncsPtr)crtc->funcs);
 
     LEAVE();
 }

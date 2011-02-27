@@ -520,7 +520,7 @@ SMI_AddEncoding(XF86VideoEncodingPtr enc, int i,
     input_string = VideoInputs[input].name;
     sprintf(channel_string, "%d", channel);
     enc[i].id     = i;
-    enc[i].name   = xalloc(strlen(norm_string) + 
+    enc[i].name   = malloc(strlen(norm_string) +
 			   strlen(input_string) + 
 			   strlen(channel_string)+3);
     if (NULL == enc[i].name)
@@ -547,22 +547,22 @@ SMI_BuildEncodings(SMI_PortPtr p)
     ENTER();
 
     /* allocate memory for encoding array */
-    p->enc = xalloc(sizeof(XF86VideoEncodingRec) * N_ENCODINGS);
+    p->enc = malloc(sizeof(XF86VideoEncodingRec) * N_ENCODINGS);
     if (NULL == p->enc)
 	goto fail;
     memset(p->enc,0,sizeof(XF86VideoEncodingRec) * N_ENCODINGS);
     /* allocate memory for video norm array */
-    p->norm = xalloc(sizeof(int) * N_ENCODINGS);
+    p->norm = malloc(sizeof(int) * N_ENCODINGS);
     if (NULL == p->norm)
 	goto fail;
     memset(p->norm,0,sizeof(int) * N_ENCODINGS);
     /* allocate memory for video input format array */
-    p->input = xalloc(sizeof(int) * N_ENCODINGS);
+    p->input = malloc(sizeof(int) * N_ENCODINGS);
     if (NULL == p->input)
 	goto fail;
     memset(p->input,0,sizeof(int) * N_ENCODINGS);
     /* allocate memory for video channel number array */
-    p->channel = xalloc(sizeof(int) * N_ENCODINGS);
+    p->channel = malloc(sizeof(int) * N_ENCODINGS);
     if (NULL == p->channel)
 	goto fail;
     memset(p->channel,0,sizeof(int) * N_ENCODINGS);
@@ -590,13 +590,13 @@ SMI_BuildEncodings(SMI_PortPtr p)
     LEAVE();
     
  fail:
-    if (p->input) xfree(p->input);
+    free(p->input);
     p->input = NULL;
-    if (p->norm) xfree(p->norm);
+    free(p->norm);
     p->norm = NULL;
-    if (p->channel) xfree(p->channel);
+    free(p->channel);
     p->channel = NULL;
-    if (p->enc) xfree(p->enc);
+    free(p->enc);
     p->enc = NULL;
     p->nenc = 0;
     LEAVE();
@@ -632,7 +632,7 @@ SMI_InitVideo(ScreenPtr pScreen)
             numAdaptors = 1;
             ptrAdaptors = &newAdaptor;
         } else {
-            newAdaptors = xalloc((numAdaptors + 1) *
+            newAdaptors = malloc((numAdaptors + 1) *
                     sizeof(XF86VideoAdaptorPtr*));
             if (newAdaptors != NULL) {
                 memcpy(newAdaptors, ptrAdaptors,
@@ -648,9 +648,7 @@ SMI_InitVideo(ScreenPtr pScreen)
         xf86XVScreenInit(pScreen, ptrAdaptors, numAdaptors);
     }
 
-    if (newAdaptors != NULL) {
-        xfree(newAdaptors);
-    }
+    free(newAdaptors);
 
     LEAVE();
 }
@@ -824,7 +822,7 @@ SMI_SetupVideo(ScreenPtr pScreen)
 
     ENTER();
 
-    ptrAdaptor = xcalloc(1, sizeof(XF86VideoAdaptorRec) +
+    ptrAdaptor = calloc(1, sizeof(XF86VideoAdaptorRec) +
 		 sizeof(DevUnion) + sizeof(SMI_PortRec));
     if (ptrAdaptor == NULL)
 	LEAVE(NULL);
@@ -2164,7 +2162,7 @@ SMI_InitOffscreenImages(
 
     ENTER();
 
-    offscreenImages = xalloc(sizeof(XF86OffscreenImageRec));
+    offscreenImages = malloc(sizeof(XF86OffscreenImageRec));
     if (offscreenImages == NULL) {
 	LEAVE();
     }
@@ -2377,22 +2375,22 @@ SMI_AllocSurface(
     if (offset == 0)
 	LEAVE(BadAlloc);
 
-    surface->pitches = xalloc(sizeof(int));
+    surface->pitches = malloc(sizeof(int));
     if (surface->pitches == NULL) {
 	SMI_FreeMemory(pScrn, surface_memory);
 	LEAVE(BadAlloc);
     }
-    surface->offsets = xalloc(sizeof(int));
+    surface->offsets = malloc(sizeof(int));
     if (surface->offsets == NULL) {
-	xfree(surface->pitches);
+	free(surface->pitches);
 	SMI_FreeMemory(pScrn, surface_memory);
 	LEAVE(BadAlloc);
     }
 
-    ptrOffscreen = xalloc(sizeof(SMI_OffscreenRec));
+    ptrOffscreen = malloc(sizeof(SMI_OffscreenRec));
     if (ptrOffscreen == NULL) {
-	xfree(surface->offsets);
-	xfree(surface->pitches);
+	free(surface->offsets);
+	free(surface->pitches);
 	SMI_FreeMemory(pScrn, surface_memory);
 	LEAVE(BadAlloc);
     }
@@ -2426,9 +2424,9 @@ SMI_FreeSurface(
     }
 
     SMI_FreeMemory(pScrn, ptrOffscreen->surface_memory);
-    xfree(surface->pitches);
-    xfree(surface->offsets);
-    xfree(surface->devPrivate.ptr);
+    free(surface->pitches);
+    free(surface->offsets);
+    free(surface->devPrivate.ptr);
 
     LEAVE(Success);
 }

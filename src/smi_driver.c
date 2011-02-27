@@ -281,9 +281,9 @@ SMI_FreeRec(ScrnInfoPtr pScrn)
     ENTER();
 
     if (pSmi) {
-	xfree(pSmi->save);
-	xfree(pSmi->mode);
-	xfree(pScrn->driverPrivate);
+	free(pSmi->save);
+	free(pSmi->mode);
+	free(pScrn->driverPrivate);
 	pScrn->driverPrivate = NULL;
     }
 
@@ -338,7 +338,7 @@ SMI_Probe(DriverPtr drv, int flags)
 				    numDevSections, drv, &usedChips);
 
     /* Free it since we don't need that list after this */
-    xfree(devSections);
+    free(devSections);
     if (numUsed <= 0)
 	LEAVE(FALSE);
 
@@ -364,14 +364,14 @@ SMI_Probe(DriverPtr drv, int flags)
 		if ((pEnt = xf86GetEntityInfo(usedChips[i]))) {
 			pScrn->EnterVT   = SMI_EnterVT;
 			pScrn->LeaveVT   = SMI_LeaveVT;
-		    xfree(pEnt);
+		    free(pEnt);
 		}
 		pScrn->FreeScreen    = SMI_FreeScreen;
 		foundScreen	     = TRUE;
 	    }
 	}
     }
-    xfree(usedChips);
+    free(usedChips);
 
     LEAVE(foundScreen);
 }
@@ -421,7 +421,7 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
     }
 
     if (pEnt->location.type != BUS_PCI) {
-	xfree(pEnt);
+	free(pEnt);
 	SMI_FreeRec(pScrn);
 	LEAVE(FALSE);
     }
@@ -519,7 +519,7 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
     }
 
     /* Process the options */
-    if (!(pSmi->Options = xalloc(sizeof(SMIOptions))))
+    if (!(pSmi->Options = malloc(sizeof(SMIOptions))))
 	LEAVE(FALSE);
 
     memcpy(pSmi->Options, SMIOptions, sizeof(SMIOptions));
@@ -662,7 +662,7 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
     }
     else
         pSmi->ChipRev = PCI_DEV_REVISION(pSmi->PciInfo);
-    xfree(pEnt);
+    free(pEnt);
 
     /*
      * This shouldn't happen because such problems should be caught in
@@ -1858,7 +1858,7 @@ SMI_CloseScreen(int scrnIndex, ScreenPtr pScreen)
 	pSmi->pInt10 = NULL;
     }
     if (pSmi->ptrAdaptor != NULL) {
-	xfree(pSmi->ptrAdaptor);
+	free(pSmi->ptrAdaptor);
     }
     if (pSmi->BlockHandler != NULL) {
 	pScreen->BlockHandler = pSmi->BlockHandler;
