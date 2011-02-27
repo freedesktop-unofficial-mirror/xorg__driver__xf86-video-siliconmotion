@@ -1495,7 +1495,7 @@ SMI_MapMem(ScrnInfoPtr pScrn)
 
     xf86DrvMsgVerb(pScrn->scrnIndex, X_INFO, VERBLEV,
 		   "Physical frame buffer at 0x%08lX offset: 0x%08lX\n",
-		   pScrn->memPhysBase, pSmi->fbMapOffset);
+		   pScrn->memPhysBase, (unsigned long)pSmi->fbMapOffset);
     xf86DrvMsgVerb(pScrn->scrnIndex, X_INFO, VERBLEV,
 		   "Logical frame buffer at %p - %p\n", pSmi->FBBase,
 		   pSmi->FBBase + pSmi->videoRAMBytes - 1);
