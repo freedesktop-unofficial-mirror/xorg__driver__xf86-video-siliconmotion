@@ -927,7 +927,9 @@ SMI_EnterVT(int scrnIndex, int flags)
     /* FBBase may have changed after remapping the memory */
     pScrn->pScreen->ModifyPixmapHeader(pScrn->pScreen->GetScreenPixmap(pScrn->pScreen),
 				       -1,-1,-1,-1,-1, pSmi->FBBase + pSmi->FBOffset);
+#if (XORG_VERSION_CURRENT < XORG_VERSION_NUMERIC(1, 9, 99, 1, 0))
     pScrn->pixmapPrivate.ptr=pSmi->FBBase + pSmi->FBOffset;
+#endif
 
     if(pSmi->useEXA)
        pSmi->EXADriverPtr->memoryBase=pSmi->FBBase;
