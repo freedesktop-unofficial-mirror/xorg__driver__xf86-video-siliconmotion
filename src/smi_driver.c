@@ -442,7 +442,11 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
 	    LEAVE(FALSE);
 
 	hwp = VGAHWPTR(pScrn);
+#if ABI_VIDEODRV_VERSION < 12
 	pSmi->PIOBase = hwp->PIOOffset;
+#else
+	pSmi->PIOBase = 0;
+#endif
 
 	xf86ErrorFVerb(VERBLEV, "\tSMI_PreInit vgaCRIndex=%x, vgaIOBase=%x, "
 		       "MMIOBase=%p\n", hwp->IOBase + VGA_CRTC_INDEX_OFFSET,
