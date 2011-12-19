@@ -442,6 +442,7 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
 	    LEAVE(FALSE);
 
 	hwp = VGAHWPTR(pScrn);
+	vgaHWSetStdFuncs(hwp);
 #if GET_ABI_MAJOR(ABI_VIDEODRV_VERSION) < 12
 	pSmi->PIOBase = hwp->PIOOffset;
 #else
