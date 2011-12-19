@@ -879,8 +879,8 @@ SMI_PreInit(ScrnInfoPtr pScrn, int flags)
     if (!pSmi->NoAccel) {
 	if (!pSmi->useEXA) {
 	    if (!xf86LoadSubModule(pScrn, "xaa")) {
-		SMI_FreeRec(pScrn);
-		LEAVE(FALSE);
+		xf86DrvMsg(pScrn->scrnIndex, X_WARNING, "No acceleration\n");
+		pSmi->NoAccel = 1;
 	    }
 	} else {
 	    XF86ModReqInfo req;
