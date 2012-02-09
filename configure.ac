@@ -24,7 +24,7 @@
 AC_PREREQ([2.60])
 AC_INIT([xf86-video-siliconmotion],
         [1.7.5],
-        [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg],
+        [https://bugs.freedesktop.org/enter_bug.cgi?product=xorg&component=Driver/siliconmotion],
         [xf86-video-siliconmotion])
 
 # Require X.Org macros 1.8 or later for MAN_SUBSTS set by XORG_MANPAGE_SECTIONS
