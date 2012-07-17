@@ -1887,7 +1887,7 @@ SMI_FreeScreen(FREE_SCREEN_ARGS_DECL)
 static Bool
 SMI_SaveScreen(ScreenPtr pScreen, int mode)
 {
-    ScrnInfoPtr pScrn = xf86Screens[pScreen->myNum];
+    ScrnInfoPtr pScrn = xf86ScreenToScrn(pScreen);
 
     ENTER();
 

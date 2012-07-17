@@ -70,7 +70,7 @@ SMI_XAAInit(ScreenPtr pScreen)
 {
 #ifdef HAVE_XAA_H
     XAAInfoRecPtr infoPtr;
-    ScrnInfoPtr pScrn = xf86Screens[pScreen->myNum];
+    ScrnInfoPtr pScrn = xf86ScreenToScrn(pScreen);
     SMIPtr pSmi = SMIPTR(pScrn);
     /*BoxRec AvailFBArea;*/
     Bool ret;
