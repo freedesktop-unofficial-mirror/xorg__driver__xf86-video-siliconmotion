@@ -63,6 +63,7 @@ authorization from the XFree86 Project and Silicon Motion.
 #include "xf86xv.h"
 #include <X11/extensions/Xv.h>
 
+#include "compat-api.h"
 /******************************************************************************/
 /*			D E F I N I T I O N S				      */
 /******************************************************************************/
