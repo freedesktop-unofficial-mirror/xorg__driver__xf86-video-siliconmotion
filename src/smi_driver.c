@@ -1847,9 +1847,11 @@ SMI_CloseScreen(int scrnIndex, ScreenPtr pScreen)
 	/* Restore console mode and unmap framebuffer */
 	SMI_LeaveVT(scrnIndex, 0);
 
+#ifdef HAVE_XAA_H
     if (pSmi->XAAInfoRec != NULL) {
 	XAADestroyInfoRec(pSmi->XAAInfoRec);
     }
+#endif
     if (pSmi->EXADriverPtr) {
 	exaDriverFini(pScreen);
 	pSmi->EXADriverPtr = NULL;

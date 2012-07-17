@@ -49,7 +49,10 @@ authorization from the XFree86 Project and Silicon Motion.
 
 #include "fb.h"
 
+#ifdef HAVE_XAA_H
 #include "xaa.h"
+#endif
+#include "xf86fbman.h"
 #include "exa.h"
 #include "xf86cmap.h"
 #include "xf86i2c.h"
@@ -239,7 +242,9 @@ typedef struct
 					   printed using a counter */
 
     Bool		useBIOS;	/* Use BIOS for mode sets */
+#ifdef HAVE_XAA_H
     XAAInfoRecPtr	XAAInfoRec;	/* XAA info Rec */
+#endif
 
     /* EXA */
     ExaDriverPtr	EXADriverPtr;
