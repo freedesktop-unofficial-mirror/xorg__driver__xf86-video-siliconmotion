@@ -573,7 +573,7 @@ SMILynx_ddc1Read(ScrnInfoPtr pScrn)
 }
 
 static void
-SMILynx_ddc1SetSpeed(ScrnInfoPtr pScrn, xf86ddcSpeec speed)
+SMILynx_ddc1SetSpeed(ScrnInfoPtr pScrn, xf86ddcSpeed speed)
 {
     vgaHWddc1SetSpeed(pScrn, speed);
 }
