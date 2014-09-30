@@ -37,7 +37,6 @@ authorization from the XFree86 Project and Silicon Motion.
 
 #include "xf86.h"
 #include "xf86_OSproc.h"
-#include "xf86PciInfo.h"
 #include "xf86Pci.h"
 #include "xf86Cursor.h"
 #include "vgaHW.h"
@@ -67,6 +66,15 @@ authorization from the XFree86 Project and Silicon Motion.
 /******************************************************************************/
 /*			D E F I N I T I O N S				      */
 /******************************************************************************/
+
+#define PCI_VENDOR_SMI		0x126F
+#define PCI_CHIP_SMI910		0x0910
+#define PCI_CHIP_SMI810		0x0810
+#define PCI_CHIP_SMI820		0x0820
+#define PCI_CHIP_SMI710		0x0710
+#define PCI_CHIP_SMI712		0x0712
+#define PCI_CHIP_SMI720		0x0720
+#define PCI_CHIP_SMI731		0x0730
 
 #ifndef SMI_DEBUG
 #define SMI_DEBUG		0
