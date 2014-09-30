@@ -221,7 +221,7 @@ typedef struct
     CARD8 *		DataPortBase;	/* Base of data port */
     int			DataPortSize;	/* Size of data port */
     CARD8 *		IOBase;		/* Base of MMIO VGA ports */
-    IOADDRESS		PIOBase;	/* Base of I/O ports */
+    unsigned int	PIOBase;	/* Base of I/O ports */
     unsigned char *	FBBase;		/* Base of FB */
     CARD32		fbMapOffset;    /* offset for fb mapping */
     CARD32		FBOffset;	/* Current visual FB starting
